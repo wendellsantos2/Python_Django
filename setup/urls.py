@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-from galeria.views import index,imagem
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-        path('', index, name='index'),
-        path('admin/', admin.site.urls),
-        path('imagem/<int:foto_id>', imagem, name='imagem'),
-]
+    path('admin/', admin.site.urls),
+    path('', include('galeria.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
